@@ -13,7 +13,7 @@ namespace Gravity.Systems.Rendering
     class TrajectoryRenderingSystem : EntityDrawSystem
     {
         private readonly Color DefaultColor = Color.White;
-        private readonly float DefaultThickness = 2f;
+        private readonly float DefaultThickness = 1f;
 
         private readonly OrthographicCamera _camera;
         private readonly SpriteBatch _spriteBatch;

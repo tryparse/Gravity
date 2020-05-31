@@ -42,7 +42,7 @@ namespace Gravity.Components
 
                 if (previous.From != position
                     && previous.To != position
-                    && distance > 5f)
+                    && distance > 10f)
                 {
                     _history.Enqueue(new TrajectoryHistoryElement(previous.To, position));
                 }

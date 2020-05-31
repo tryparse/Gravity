@@ -40,10 +40,10 @@ namespace Gravity.Systems
             var gravityForce = _gravityForceMapper.Get(entityId);
             var velocity = _velocityMapper.Get(entityId);
 
-            var acceleration = gravityForce.Value / mass.Value;
-            var dTime = (float)gameTime.ElapsedGameTime.TotalMilliseconds / (1000f / 3f);
+            var gravityAcceleration = Vector2.Divide(gravityForce.Value, mass.Value);
+            var dTime = (float)gameTime.ElapsedGameTime.TotalMilliseconds / 1000f;
 
-            velocity.Value += acceleration * dTime * Universe.TimeSpeed;
+            velocity.Value += gravityAcceleration * dTime * Universe.TimeSpeed;
             position.Value += velocity.Value * dTime * Universe.TimeSpeed;
         }
     }
