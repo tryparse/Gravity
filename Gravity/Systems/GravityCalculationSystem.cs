@@ -47,8 +47,8 @@ namespace Gravity.Systems
 
                     var distance = Vector2.Distance(otherBodyPosition.Value, calculatedBodyPosition.Value);
                     var forceDirection = Vector2.Normalize(otherBodyPosition.Value - calculatedBodyPosition.Value);
-                    var gravityForce = Universe.CalculateGravityForce(otherBodyMass.Value, calculatedBodyMass.Value, distance);
-                    var force = Vector2.Multiply(forceDirection, gravityForce);
+                    var gravityForceAmount = Universe.CalculateGravityForce(otherBodyMass.Value, calculatedBodyMass.Value, distance);
+                    var force = Vector2.Multiply(forceDirection, gravityForceAmount);
 
                     resultForce += force;
                 }

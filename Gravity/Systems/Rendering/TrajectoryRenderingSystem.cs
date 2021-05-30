@@ -12,9 +12,9 @@ namespace Gravity.Systems.Rendering
 {
     class TrajectoryRenderingSystem : EntityDrawSystem
     {
-        private readonly Color DefaultColor = Color.White;
+        private readonly Color DefaultColor = Color.Red;
         private readonly float DefaultThickness = 1f;
-
+        private readonly GraphicsDevice _graphicsDevice;
         private readonly OrthographicCamera _camera;
         private readonly SpriteBatch _spriteBatch;
 
@@ -24,8 +24,10 @@ namespace Gravity.Systems.Rendering
         public TrajectoryRenderingSystem(GraphicsDevice graphicsDevice, OrthographicCamera camera)
             : base(new AspectBuilder().All(typeof(TrajectoryComponent)))
         {
-            _spriteBatch = new SpriteBatch(graphicsDevice);
-            _camera = camera;
+            _graphicsDevice = graphicsDevice ?? throw new ArgumentNullException(nameof(graphicsDevice));
+            _camera = camera ?? throw new ArgumentNullException(nameof(camera));
+
+            _spriteBatch = new SpriteBatch(_graphicsDevice);
         }
 
         public override void Draw(GameTime gameTime)
@@ -37,6 +39,7 @@ namespace Gravity.Systems.Rendering
             foreach (var entityId in ActiveEntities)
             {
                 var color = _colorData.Get(entityId)?.Value ?? DefaultColor;
+                color.A = byte.MaxValue / 3;
 
                 foreach (var trajectoryLine in _trajectoryData.Get(entityId).History)
                 {

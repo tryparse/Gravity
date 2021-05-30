@@ -2,17 +2,68 @@
 using System.Collections.Generic;
 using System.Text;
 using Gravity.Components;
+using Gravity.Components.Rendering;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using MonoGame.Extended;
 using MonoGame.Extended.BitmapFonts;
+using MonoGame.Extended.Graphics;
+using MonoGame.Extended.Sprites;
 using MonoGame.Extended.Entities;
 using MonoGame.Extended.Entities.Systems;
 
 namespace Gravity.Systems.Rendering
 {
-    class CelestialsRenderingSystem : EntityDrawSystem
+    class CelestialsSpriteRenderingSystem : EntityDrawSystem
     {
+        private readonly GraphicsDevice _graphicsDevice;
+        private readonly SpriteFont _spriteFont;
+        private readonly SpriteBatch _spriteBatch;
+        private readonly OrthographicCamera _camera;
+        ComponentMapper<PositionComponent> _positionMapper;
+        ComponentMapper<RadiusComponent> _radiusMapper;
+        ComponentMapper<SpriteComponent> _spriteMapper;
+
+        public CelestialsSpriteRenderingSystem(GraphicsDevice graphicsDevice, SpriteFont spriteFont, OrthographicCamera camera)
+            : base(new AspectBuilder()
+                  .All(typeof(PositionComponent), typeof(RadiusComponent), typeof(SpriteComponent)))
+        {
+            _graphicsDevice = graphicsDevice;
+            _spriteFont = spriteFont;
+            _camera = camera;
+            _spriteBatch = new SpriteBatch(_graphicsDevice);
+        }
+
+        public override void Draw(GameTime gameTime)
+        {
+            _spriteBatch.Begin(transformMatrix: _camera.GetViewMatrix());
+
+            foreach (var id in ActiveEntities)
+            {
+                var position = _positionMapper.Get(id);
+                var radius = _radiusMapper.Get(id);
+                var sprite = _spriteMapper.Get(id);
+                var scale = new Vector2(
+                    radius.Value * 2 / sprite.Sprite.TextureRegion.Width);
+
+                _spriteBatch.Draw(sprite.Sprite, position.Value, 0f, scale);
+            }
+
+            _spriteBatch.End();
+        }
+
+        public override void Initialize(IComponentMapperService mapperService)
+        {
+            _positionMapper = mapperService.GetMapper<PositionComponent>();
+            _radiusMapper = mapperService.GetMapper<RadiusComponent>();
+            _spriteMapper = mapperService.GetMapper<SpriteComponent>();
+        }
+    }
+
+    class CelestialsPrimitiveRenderingSystem : EntityDrawSystem
+    {
+        private readonly Color DefaultColor = Color.Red;
+
         private readonly GraphicsDevice _graphicsDevice;
         private readonly SpriteBatch _spriteBatch;
         private readonly SpriteFont _spriteFont;
@@ -26,7 +77,7 @@ namespace Gravity.Systems.Rendering
 
         private readonly int DefaultThickness = 2;
 
-        public CelestialsRenderingSystem(GraphicsDevice graphicsDevice, SpriteFont spriteFont, OrthographicCamera camera)
+        public CelestialsPrimitiveRenderingSystem(GraphicsDevice graphicsDevice, SpriteFont spriteFont, OrthographicCamera camera)
             : base(new AspectBuilder()
                   .All(typeof(PositionComponent), typeof(RadiusComponent)))
         {
@@ -34,6 +85,13 @@ namespace Gravity.Systems.Rendering
             _spriteFont = spriteFont ?? throw new ArgumentNullException(nameof(spriteFont));
             _camera = camera ?? throw new ArgumentNullException(nameof(camera));
             _spriteBatch = new SpriteBatch(_graphicsDevice);
+
+            LoadContent();
+        }
+
+        private void LoadContent()
+        {
+
         }
 
         public override void Draw(GameTime gameTime)
@@ -57,7 +115,7 @@ namespace Gravity.Systems.Rendering
                 var screenBounds = _camera.BoundingRectangle;
                 var color = _colorMapper.Has(id)
                     ? _colorMapper.Get(id).Value
-                    : Color.Red;
+                    : DefaultColor;
 
                 if (screenBounds.Intersects(shape))
                 {
@@ -92,7 +150,7 @@ namespace Gravity.Systems.Rendering
             {
                 var position = _positionMapper.Get(id);
 
-                _spriteBatch.DrawString(_spriteFont, $"ID={id}", _camera.WorldToScreen(position.Value), Color.Red);
+                _spriteBatch.DrawString(_spriteFont, $"ID={id}", _camera.WorldToScreen(position.Value), DefaultColor);
             }
 
             _spriteBatch.End();

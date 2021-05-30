@@ -3,20 +3,18 @@ using Microsoft.Xna.Framework;
 using MonoGame.Extended;
 using MonoGame.Extended.Entities;
 using MonoGame.Extended.Entities.Systems;
-using System;
-using System.Collections.Generic;
-using System.Text;
+using System.Linq;
 
 namespace Gravity.Systems
 {
-    class CameraAnchorSystem : EntityProcessingSystem
+    class CameraAnchorSystem : EntityUpdateSystem
     {
         private readonly OrthographicCamera _gameCamera;
 
         private ComponentMapper<PositionComponent> _positionData;
 
         public CameraAnchorSystem(OrthographicCamera gameCamera)
-            : base(new AspectBuilder().One(typeof(PositionComponent), typeof(CameraAnchorComponent)))
+            : base(new AspectBuilder().All(typeof(PositionComponent), typeof(CameraAnchorComponent)))
         {
             _gameCamera = gameCamera;
         }
@@ -26,9 +24,15 @@ namespace Gravity.Systems
             _positionData = mapperService.GetMapper<PositionComponent>();
         }
 
-        public override void Process(GameTime gameTime, int entityId)
+        public override void Update(GameTime gameTime)
         {
-            _gameCamera.LookAt(_positionData.Get(entityId).Value);
+            if (!ActiveEntities.IsEmpty)
+            {
+                var entityId = ActiveEntities
+                    .First();
+
+                _gameCamera.LookAt(_positionData.Get(entityId).Value);
+            }
         }
     }
 }

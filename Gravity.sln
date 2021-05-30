@@ -3,7 +3,17 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29926.136
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gravity", "Gravity\Gravity.csproj", "{74011F80-1D58-4202-95B9-F4A9B93A80D4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Gravity", "Gravity\Gravity.csproj", "{74011F80-1D58-4202-95B9-F4A9B93A80D4}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GravityGameTests", "GravityGameTests\GravityGameTests.csproj", "{1615EA4C-4AF4-4A9D-BAD2-AE0F9DA8E3FD}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Illumination", "Illumination\Illumination.csproj", "{861C6970-7F4B-43DD-825C-D8F541A8E7E2}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IlluminationDemo", "IlluminationDemo\IlluminationDemo.csproj", "{0635C715-7046-4F4D-ABE6-0AADF2ED91D1}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PlanetTextureGenerator", "PlanetTextureGenerator\PlanetTextureGenerator.csproj", "{26B323D0-53F6-48A6-94F9-12242653407B}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ShaderTool", "ShaderTool\ShaderTool\ShaderTool.csproj", "{5E5DCF89-9E20-4F74-B380-775D67B23110}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +25,26 @@ Global
 		{74011F80-1D58-4202-95B9-F4A9B93A80D4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{74011F80-1D58-4202-95B9-F4A9B93A80D4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{74011F80-1D58-4202-95B9-F4A9B93A80D4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1615EA4C-4AF4-4A9D-BAD2-AE0F9DA8E3FD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1615EA4C-4AF4-4A9D-BAD2-AE0F9DA8E3FD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1615EA4C-4AF4-4A9D-BAD2-AE0F9DA8E3FD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1615EA4C-4AF4-4A9D-BAD2-AE0F9DA8E3FD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{861C6970-7F4B-43DD-825C-D8F541A8E7E2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{861C6970-7F4B-43DD-825C-D8F541A8E7E2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{861C6970-7F4B-43DD-825C-D8F541A8E7E2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{861C6970-7F4B-43DD-825C-D8F541A8E7E2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0635C715-7046-4F4D-ABE6-0AADF2ED91D1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0635C715-7046-4F4D-ABE6-0AADF2ED91D1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0635C715-7046-4F4D-ABE6-0AADF2ED91D1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0635C715-7046-4F4D-ABE6-0AADF2ED91D1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{26B323D0-53F6-48A6-94F9-12242653407B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{26B323D0-53F6-48A6-94F9-12242653407B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{26B323D0-53F6-48A6-94F9-12242653407B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{26B323D0-53F6-48A6-94F9-12242653407B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5E5DCF89-9E20-4F74-B380-775D67B23110}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5E5DCF89-9E20-4F74-B380-775D67B23110}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5E5DCF89-9E20-4F74-B380-775D67B23110}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5E5DCF89-9E20-4F74-B380-775D67B23110}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

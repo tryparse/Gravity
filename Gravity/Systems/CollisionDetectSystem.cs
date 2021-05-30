@@ -1,13 +1,7 @@
 ﻿using Gravity.Components;
 using Microsoft.Xna.Framework;
-using MonoGame.Extended;
-using MonoGame.Extended.Collisions;
 using MonoGame.Extended.Entities;
 using MonoGame.Extended.Entities.Systems;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace Gravity.Systems
 {

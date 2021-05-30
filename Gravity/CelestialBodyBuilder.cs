@@ -11,17 +11,19 @@ namespace Gravity
     {
         ICelestialBodyBuilder Reset();
 
-        ICelestialBodyBuilder WithPosition(Vector2 position);
+        ICelestialBodyBuilder SetPosition(Vector2 position);
 
-        ICelestialBodyBuilder WithRadius(float radius);
+        ICelestialBodyBuilder SetRadius(float radius);
 
-        ICelestialBodyBuilder WithMass(float mass);
+        ICelestialBodyBuilder SetMass(float mass);
 
-        ICelestialBodyBuilder WithVelocity(Vector2 velocity);
+        ICelestialBodyBuilder SetVelocity(Vector2 velocity);
 
-        ICelestialBodyBuilder WithColor(Color color);
+        ICelestialBodyBuilder SetColor(Color color);
 
-        ICelestialBodyBuilder WithTrajectory();
+        ICelestialBodyBuilder WithTrajectoryHistory();
+
+        ICelestialBodyBuilder WithTrajectoryHistory(int historyPointCount);
 
         Entity Build();
     }
@@ -62,28 +64,28 @@ namespace Gravity
             return this;
         }
 
-        public ICelestialBodyBuilder WithPosition(Vector2 position)
+        public ICelestialBodyBuilder SetPosition(Vector2 position)
         {
             _positionComponent.Value = position;
 
             return this;
         }
 
-        public ICelestialBodyBuilder WithRadius(float radius)
+        public ICelestialBodyBuilder SetRadius(float radius)
         {
             _radiusComponent.Value = radius;
 
             return this;
         }
 
-        public ICelestialBodyBuilder WithMass(float mass)
+        public ICelestialBodyBuilder SetMass(float mass)
         {
             _massComponent.Value = mass;
 
             return this;
         }
 
-        public ICelestialBodyBuilder WithVelocity(Vector2 velocity)
+        public ICelestialBodyBuilder SetVelocity(Vector2 velocity)
         {
             _velocityComponent = new VelocityComponent(velocity);
             _withVelocity = true;
@@ -91,7 +93,7 @@ namespace Gravity
             return this;
         }
 
-        public ICelestialBodyBuilder WithColor(Color color)
+        public ICelestialBodyBuilder SetColor(Color color)
         {
             _colorComponent = new ColorComponent(color);
             _withColor = true;
@@ -99,9 +101,17 @@ namespace Gravity
             return this;
         }
 
-        public ICelestialBodyBuilder WithTrajectory()
+        public ICelestialBodyBuilder WithTrajectoryHistory()
         {
             _trajectoryComponent = new TrajectoryComponent();
+            _withTrajectory = true;
+
+            return this;
+        }
+
+        public ICelestialBodyBuilder WithTrajectoryHistory(int historyPointCount)
+        {
+            _trajectoryComponent = new TrajectoryComponent(historyPointCount);
             _withTrajectory = true;
 
             return this;
@@ -111,6 +121,7 @@ namespace Gravity
         {
             var entity = _world.CreateEntity();
 
+            entity.Attach(new CelestialBodyTag());
             entity.Attach(_positionComponent);
             entity.Attach(_massComponent);
             entity.Attach(_radiusComponent);
