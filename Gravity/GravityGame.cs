@@ -22,7 +22,7 @@ namespace Gravity
         private const float CAMERA_MIN_ZOOM = 0.005f;
         private const float CAMERA_ZOOM_STEP = .025f;
         private const float CAMERA_REDUCED_ZOOM_STEP = .005f;
-        private const float CAMERA_DEFAULT_ZOOM = .5f;
+        private const float CAMERA_DEFAULT_ZOOM = 1f;
         private const float STAR_MASS = 100f;
         private readonly GraphicsDeviceManager _graphics;
         private RenderingCore _renderingCore;

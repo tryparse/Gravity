@@ -31,18 +31,18 @@ namespace Illumination
             _renderTarget = _renderTargetFactory.CreateRenderTarget();
         }
 
-        public RenderTarget2D Draw(PointLight light, RenderTarget2D shadowMapRenderTarget, HashSet<Polygon> shadowPolygons, bool isDebug)
+        public RenderTarget2D Draw(PointLight light, RenderTarget2D shadowMapRenderTarget, HashSet<Polygon> lightPolygons, bool isDebug)
         {
             _graphicsDevice.SetRenderTarget(_renderTarget);
             _graphicsDevice.Clear(Color.Transparent);
 
             if (isDebug)
             {
-                if (shadowPolygons.Any())
+                if (lightPolygons.Any())
                 {
                     var segmentsData = new List<VertexPositionColor>();
 
-                    foreach (var polygon in shadowPolygons)
+                    foreach (var polygon in lightPolygons)
                     {
                         var p1 = polygon.Vertices[0];
                         var p2 = polygon.Vertices[1];

@@ -84,7 +84,7 @@ namespace Illumination.Visibility
                 _rayCasts.Add(new RayCast(additionalRay2, _radius));
             }
 
-            for (int i = 0; i < 360; i+=20)
+            for (int i = 0; i < 360; i+=90)
             {
                 var angle = new Angle(MathHelper.ToRadians(i));
                 var direction = angle.ToUnitVector();
@@ -131,6 +131,8 @@ namespace Illumination.Visibility
 
                 output.Add(new Polygon(verticies));
             }
+
+            _rayCasts = _rayCasts.OrderBy(x => x.Angle.Degrees).ToList();
 
             var last = _rayCasts.LastOrDefault();
             var first = _rayCasts.FirstOrDefault();

@@ -26,7 +26,7 @@ namespace Illumination
             _polygonBatch = new PolygonBatch(_graphicsDevice, _camera);
         }
 
-        public RenderTarget2D Draw(HashSet<Polygon> shadowPolygons)
+        public RenderTarget2D Draw(HashSet<Polygon> lightPolygons)
         {
             _graphicsDevice.SetRenderTarget(_renderTarget);
             _graphicsDevice.Clear(Color.Transparent);
@@ -35,9 +35,9 @@ namespace Illumination
 
             var vertexColor = Color.White;
 
-            if (shadowPolygons.Any())
+            if (lightPolygons.Any())
             {
-                foreach (var polygon in shadowPolygons)
+                foreach (var polygon in lightPolygons)
                 {
                     var vertices = polygon.Vertices;
                     polygonsVertexData.Add(new VertexPositionColor(new Vector3(vertices[0], 0), vertexColor));
